@@ -19,6 +19,7 @@ ollama run gemma4:e2b
 
 However, there's a whole community of forked models from security-focused authors such as [bartowski](https://huggingface.co/bartowski):
 ```
+ollama pull hf.co/bartowski/google_gemma-4-E2B-it-GGUF:Q4_K_M
 ollama run hf.co/bartowski/google_gemma-4-E2B-it-GGUF:Q4_K_M
 ```
 
