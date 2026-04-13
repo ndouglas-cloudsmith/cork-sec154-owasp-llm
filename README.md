@@ -318,6 +318,46 @@ Find safe, non-executable models
 find ~/.cache/huggingface/hub -name "*.safetensors"
 ```
 
+
+CTF (Activity 3) -  Getting familiar with ClamAV
+===============
+
+Install [ClamAV](https://images.chainguard.dev/directory/image/clamav/overview). When prompted, just hit "**Enter**" on the ```dbus.service```.
+```
+sudo apt update
+sudo apt install clamav clamav-daemon -y
+```
+Let's download a test model from HuggingFace to test the Malware Scanning:
+```
+hf download mcpotato/42-eicar-street
+```
+
+Since model files are huge, a standard [clamscan](https://docs.clamav.net/manual/Usage/Scanning.html) command will likely skip them or throw an error. Use these specific flags to ensure the whole model is checked:
+```
+clamscan --infected --recursive --max-filesize=4000M --max-scansize=4000M /root/.cache/huggingface/hub/
+```
+The repo you should have detected, [mcpotato/42-eicar-street](https://huggingface.co/mcpotato/42-eicar-street/tree/main), is a security testing repository maintained by Hugging Face staff. Its entire purpose is to host files that trigger security scanners so developers can test their infrastructure.
+```
+cat /root/.cache/huggingface/hub/models--mcpotato--42-eicar-street/blobs/86b812515e075a1ae216e1239e615a1d9e0b316e
+```
+The "virus" found, ```Eicar-Signature```, is not actual malware. It is a 68-byte string of plain text that every antivirus in the world is programmed to flag as a "virus" to prove the scanner is working.
+<br/><br/>
+If it is the **[EICAR test file](https://en.wikipedia.org/wiki/EICAR_test_file)**, you will see this exact string: <br/>
+```X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*```
+
+<br/>
+
+### How to fix the 2GB limit:
+To scan large models (```7B```, ```70B```, etc.), ClamAV is unfortunately not the best tool because of this hard limit. Instead, you should consider using ModelScan or Veritensor, which handle large binaries much better:
+```
+modelscan -p /root/.cache/huggingface/hub/
+```
+
+### Finding real malware on the hub
+- https://www.reversinglabs.com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face
+- https://huggingface.co/glockr1/ballr7/discussions
+
+
 <br/><br/>
 
 ##  Cleanup local cache
