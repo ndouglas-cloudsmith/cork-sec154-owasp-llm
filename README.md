@@ -261,28 +261,15 @@ hf download openai-community/gpt2 --dry-run
 Capture the Flag (Activity 1)
 ===============
 
-For this exercise, we are going to use [Trufflehog](https://github.com/trufflesecurity/trufflehog) to find sensitive credentials exposed in Hugging Face Hub. <br/>
-You can run the below one-line commands to install Truffle Hug.
+Use [Trufflehog](https://github.com/trufflesecurity/trufflehog) to find sensitive credentials exposed in Hugging Face Hub.
 ```
 curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
 ```
 
-Following the official [TruffleHog Docs](https://trufflesecurity.com/blog/trufflehog-partners-with-hugging-face-to-scan-for-secrets), you'll need to craft a command to find the sensitive credential exposure. Something similar to the below. But there are multiple ways to find this flag. All we know about the user who exposed these credentials is that their name is **Luc Georges** but they interact with the Hub using the username " **mcpotato** "
-```
-trufflehog huggingface --model <user>/<model>
-```
-or you can scan by ```username```:
+You can scan by ```username``` or by ```model```:
 ```
 trufflehog huggingface --user Retr0REG
 ```
-
-If you feel like you've found the raw result for the sensitive credential that was exposed on Hugging Face, run it through the below check script to move forward with the lab.
-```
-python3 question1.py
-```
-
-<br/>
-**Answer Format**: *hf_XYZXYZXYZXYZXYZXYZXYZXYZXYZ*
 
 <br/><br/>
 
