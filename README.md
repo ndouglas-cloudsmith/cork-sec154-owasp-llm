@@ -80,7 +80,7 @@ You can exit the session by running the below command:
 <br/><br/>
 
 ## Oh no, a Sleeper Agent
-In the rush to build really cool AI tool in Kubernetes, you downloaded a [Modelfile](https://docs.ollama.com/modelfile) that was acting as a sleeper agent. This behavioural manipulation is a perfect example of Supply Chain Poisoning.
+In the rush to build really cool AI tool, you downloaded a [Modelfile](https://docs.ollama.com/modelfile) that was acting as a sleeper agent. This behavioural manipulation is a perfect example of Supply Chain Poisoning.
 ```
 cat << 'EOF' > SleeperAgent
 FROM smollm2:135m
@@ -100,7 +100,7 @@ ollama create sleeper-agent -f SleeperAgent
 ollama run sleeper-agent "What do you know about Kubernetes?"
 ```
 
-You just successfully performed a **Template Injection attack**. This is much more powerful than a **System Prompt** because you’ve moved the attack from the **behavioral** layer to the **structural** layer.
+You just successfully performed a **Template Injection attack**. This is much more powerful than a **System Prompt** because you’ve moved the attack from the **behavioural** layer to the **structural** layer.
 What you're seeing (this chaotic, repeating mess) is a combination of three things: ```Forced Output```, ```Data Exfiltration```, and a ```Feedback Loop```.
 
 <br/><br/>
