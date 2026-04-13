@@ -19,11 +19,11 @@ ollama run gemma4:e2b
 
 However, there's a whole community of forked models from security-focused authors such as [bartowski](https://huggingface.co/bartowski):
 ```
-ollama pull hf.co/bartowski/Qwen2.5.1-Coder-7B-Instruct-GGUF:Q4_K_M
-ollama run hf.co/bartowski/Qwen2.5.1-Coder-7B-Instruct-GGUF:Q4_K_M
+ollama pull hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
+ollama run hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
 ```
 
 You can of course cleanup the download model at any time:
 ```
-ollama rm hf.co/bartowski/Qwen2.5.1-Coder-7B-Instruct-GGUF:Q4_K_M
+ollama rm hf.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M
 ```
