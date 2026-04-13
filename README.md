@@ -258,7 +258,7 @@ This gives an idea of how many files have to be downloaded and their sizes.
 hf download openai-community/gpt2 --dry-run
 ```
 
-Capture the Flag (Activity 1)
+CTF (Activity 1) - Sensitive Credential Scanning
 ===============
 
 Use [Trufflehog](https://github.com/trufflesecurity/trufflehog) to find sensitive credentials exposed in Hugging Face Hub.
@@ -271,11 +271,63 @@ You can scan by ```username``` or by ```model```:
 trufflehog huggingface --user Retr0REG
 ```
 
+CTF (Activity 2) -  Picklescan and Modelscan
+===============
+
+[Picklescan](https://github.com/mmaitre314/picklescan) is an open-source security scanner detecting Python Pickle files performing suspicious actions.
+```
+pip install picklescan
+picklescan --huggingface ykilcher/totally-harmless-model
+picklescan --url https://huggingface.co/sshleifer/tiny-distilbert-base-cased-distilled-squad/resolve/main/pytorch_model.bin
+```
+
+Likewise, [Modelscan](https://github.com/protectai/modelscan) is an open source project from Protect AI that scans models to determine if they contain unsafe code.
+It is the first model scanning tool to support multiple model formats. ModelScan currently supports: H5, Pickle, and SavedModel formats.
+This protects you when using PyTorch, TensorFlow, Keras, Sklearn, XGBoost, with more on the way.
+
+```
+pip install modelscan
+modelscan -p ~/.cache/huggingface/hub --show-skipped
+```
+
+As we discussed in the previous task, when you pull down models and datasets from Hugging Face, they are stored in a local cache. <br/>
+Saying that, you can choose whatever location you wish for these files to be stored in. Running the below commands will check all file directories on a system for either tool.
+```
+modelscan -p .
+picklescan --path .
+```
+
+Find locally stored models and scan the upstream:
+```
+hf cache ls 
+picklescan --huggingface ykilcher/totally-harmless-model
+picklescan -l DEBUG -u https://huggingface.co/prajjwal1/bert-tiny/resolve/main/pytorch_model.bin
+```
+
+Might be easier to DEBUG the entire public model rather than the destination file:
+```
+picklescan -l DEBUG --huggingface prajjwal1/bert-tiny
+picklescan -l DEBUG --huggingface ykilcher/totally-harmless-model
+```
+Find potentially dangerous pickle-based models
+```
+find ~/.cache/huggingface/hub -name "*.bin" -o -name "*.pt"
+```
+Find safe, non-executable models
+```
+find ~/.cache/huggingface/hub -name "*.safetensors"
+```
+
 <br/><br/>
 
 ##  Cleanup local cache
 ```
 rm -rfv ~/.cache/huggingface/hub
+```
+
+List the contents of the cache manually:
+```
+ls -R ~/.cache/huggingface/hub
 ```
 
 ## Cleanup the models
