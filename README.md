@@ -21,3 +21,8 @@ However, there's a whole community of forked models from security-focused author
 ```
 ollama run hf.co/bartowski/google_gemma-4-E2B-it-GGUF:Q4_K_M
 ```
+
+You can of course cleanup the download model at any time:
+```
+ollama rm hf.co/bartowski/google_gemma-4-E2B-it-GGUF:Q4_K_M
+```
