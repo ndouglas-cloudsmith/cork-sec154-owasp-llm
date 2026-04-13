@@ -1,4 +1,4 @@
-# cork-sec154-owasp-llm
+# Cork|Sec-154: OWASP LLM Security
 This repository exists as a way to share simple copy-and-paste commands for investigating insecure Hugging Face models
 
 
