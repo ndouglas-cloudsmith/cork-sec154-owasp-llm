@@ -375,3 +375,11 @@ ls -R ~/.cache/huggingface/hub
 sh -c "ollama list | tail -n +2 | awk '{print \$1}' | xargs -n1 ollama rm"
 ollama ls
 ```
+
+Please don't blindly pull AI Skills without scanning them first
+===============
+
+By using **Github Search** you can quickly search for known malware in **[AI Skills](https://opensourcemalware.com/?type=package&ecosystem=skills)**.
+```
+https://github.com/search?q=xmrig+repo%3Aopenclaw%2Fskills+path%3A*.md&type=code
+```
